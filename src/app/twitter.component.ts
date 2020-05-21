@@ -1,5 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {AngularFireDatabase} from '@angular/fire/database';
+import {Subscription} from 'rxjs';
 
 
 @Component({
@@ -7,17 +8,21 @@ import {AngularFireDatabase} from '@angular/fire/database';
   templateUrl: './twitter.component.html',
   styleUrls: ['./twitter.component.css']
 })
-export class TwitterComponent implements OnInit {
+export class TwitterComponent implements OnInit, OnDestroy {
   private basePath = '/users';
   users: any[];
   selectedUser: any;
-
+  private usersSubscription: Subscription;
   constructor(private db: AngularFireDatabase) {}
 
   ngOnInit(): void {
-    this.db.list(this.basePath).valueChanges().subscribe( users => {
+   this.usersSubscription = this.db.list(this.basePath).valueChanges().subscribe(users => {
       this.users = users;
     });
+  }
+
+  ngOnDestroy(): void {
+    this.usersSubscription.unsubscribe();
   }
 
   onChangeUser(user: any) {

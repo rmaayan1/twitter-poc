@@ -1,0 +1,39 @@
+<div class="row">
+  <div class="col-xs-12">
+    <div class="page-header">
+      <h1>
+        <span>Tweeter</span>
+        <div id="user-select1" style="float: right;">
+          <label for="use"><select [(ngModel)]="selectedUser" (ngModelChange)="onChangeUser($event)" name="selectedUser"
+                                   id="use">
+            <option *ngFor="let user of this.users"
+                    [value]="user.name">{{user.name}}</option>
+          </select>
+          </label>
+        </div>
+      </h1>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12">
+    <div id="user-select2"></div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12">
+    <div id="user-tweet-box" class="jumbotron">
+      <div *ngFor="let tweet of getUserTweets(selectedUser)">
+        {{ tweet }}
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12 col-md-6">
+    <div id="user-following" style="padding: 2rem 0;"></div>
+  </div>
+  <div class="col-xs-12 col-md-6">
+    <div id="user-timeline" style="padding: 2rem 0;"></div>
+  </div>
+</div>

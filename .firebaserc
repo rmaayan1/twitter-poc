@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "twitter-poc-e9f8d": {
+      "hosting": {
+        "twitter-poc": [
+          "twitter-poc-e9f8d"
+        ]
+      }
+    }
+  }
+}
